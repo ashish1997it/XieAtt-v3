@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Xie Attendance</title>
+
+
+<!-- Hide this line for IE (needed for Firefox and others) -->
+<![if !IE]>
+<link rel="icon" href="http://devdeveloper.co.nf/img/DD2.png" type="image/x-icon" />            	
+<![endif]>
+<!-- This is needed for IE -->
+<link rel="shortcut icon" href="http://devdeveloper.co.nf/img/DD2.png" type="image/ico" />
+
+<meta name="google-site-verification" content="Vmzj5igFcDScz8cGYBdb08xi-j5FH7OJRr_oTteF8Vo" />
+
+<!--bootstrap-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=500">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Chau+Philomene+One|Sniglet|Signika+Negative" rel="stylesheet">
+
+
+<!--GFts-->
+<style>
+.font1{
+font-family: 'Chau Philomene One', sans-serif;
+font-size: 22px;	
+}
+</style>
+
+
+<style>
+html * {
+font-family: 'Signika Negative', sans-serif;		
+font-size: 20px;
+}
+
+</style>
+
+
+<!--Menu-->
+<style>
+.overlay {
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-y: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay {overflow-y: auto;}
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+.btn-default {
+      box-shadow: 1px 2px 5px #000000;   
+  }
+</style>
+
+<!--Menu2 name-->
+<style>
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: inherit;
+  margin-left: -20px;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.main {
+  padding: 16px;
+  margin-top: 30px;
+  height: 1500px; /* Used in this example to enable scrolling */
+}
+</style>
+
+<!--Feedback Button-->
+<style>
+.funky-show-hide.ng-hide-add {
+  transform: rotateZ(0);
+  transform-origin: right;
+  transition: all 0.5s ease-in-out;
+}
+
+.funky-show-hide.ng-hide-add.ng-hide-add-active {
+  transform: rotateZ(-135deg);
+}
+
+.funky-show-hide.ng-hide-remove {
+  transform: rotateY(90deg);
+  transform-origin: left;
+  transition: all 0.5s ease;
+}
+
+.funky-show-hide.ng-hide-remove.ng-hide-remove-active {
+  transform: rotateY(0);
+}
+
+.check-element {
+  border: 1px solid black;
+  opacity: 1;
+  padding: 10px;
+}
+</style>
+<script>
+it('should check ngShow', function() {
+  var checkbox = element(by.model('checked'));
+  var checkElem = element(by.css('.check-element'));
+
+  expect(checkElem.isDisplayed()).toBe(false);
+  checkbox.click();
+  expect(checkElem.isDisplayed()).toBe(true);
+});
+</script>
+
+
+<!--LOC-->
+ <script type="text/javascript">
+			
+ </script>
+
+
+<script>
+function startTime() {
+	
+n =  new Date();
+y = n.getFullYear();
+m = n.getMonth() + 1;
+d = n.getDate();
+document.getElementById("curDate").innerHTML = d + "/" + m + "/" + y;
+
+var dayb = new Date();
+var weekday = new Array(7);
+weekday[0] = "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+
+ dayn = weekday[dayb.getDay()];
+document.getElementById("curDay").innerHTML = dayn;
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('curTime').innerHTML =
+    h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+
+}
+
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
+
+</script>
+
+</head>
+<body onload="startTime();getLocation();" ng-app="">
+
+
+<div class="container" style="width: 500px; border: 5px solid goldenrod;">
+
+
+<div class="navbar">
+
+<a href="#">Xie Attendance</a>
+<a href="#" style="color:#333;">Xie Attendance</a>
+<span style="font-size:30px;cursor:pointer;position:fixed;margin-right:0px " onclick="openNav()"><a href="#home">&#9776; Menu</a></span>
+
+</div>
+	
+
+
+
+<div id="myNav" class="overlay" style="z-index:1; position:fixed;">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+    <a ng-click="show='a'" onclick="closeNav()">Mark Your Attendance</a>
+  </div>
+</div>
+
+<br>
+<!--
+<span style="font-size:30px;cursor:pointer;position:fixed;" onclick="openNav()">&#9776; Menu</span>
+-->
+
+<script>
+function openNav() {
+    document.getElementById("myNav").style.height = "100%";
+}
+
+function closeNav() {
+    document.getElementById("myNav").style.height = "0%";
+}
+</script>
+
+
+
+<div class="well" style="margin-top: 40px;">
+<center>
+Date : <span id="curDate"></span> <br>
+Day: <span id="curDay"></span> <br>
+Time : <span id="curTime"></span> <br>
+</center>
+
+
+</div>
+
+
+
+
+
+<div ng-app ng-init="show='a'">
+
+
+
+<div ng-show="show=='a'"  class="panel panel-default" style="padding:15px; background-color:#ECF0F1;"> 
+<div class="font1 panel-heading" style="background-color:#F7DC6F; text-align:center;"> Display a Student Recored </div>
+
+<div class="panel-body">	
+<form action="php/select2.php" method="POST">
+<label for="idNo"> Enter ID No. : </label>
+
+<input type="number" class ="form-control" name="idNo" placeholder="123789" required> <br>
+
+<center>
+<input type="submit" class="btn btn-default" name="submit" value="Display" style="font-size: 16px;">
+
+<input type="submit" class="btn btn-default" name="submit" value="Download PDF" style="font-size: 16px;" formaction="php/fpdf/generate-pdf.php">
+<br><br>
+
+<input type="email" class ="form-control" name="" placeholder="xyz@mail.com" required> <br>
+<input type="submit" class="btn btn-default" name="submit" value="mail Me" style="font-size: 16px;">
+
+</center>
+</form>
+</div>
+</div>
+
+
+</div>
+
+  
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading" style="background-color:#A2D9CE;">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1"> <b> Terms & Condition ? </b> (Click to Get More Info...)</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">	
+We trust you give you the service 
+
+		</div>
+      </div>
+    </div>
+  </div>
+  
+  
+<div style="text-align:center;">
+  Design & Develop by... <br>
+  <a href="http://devdeveloper.co.nf" target="_blank"> DevDeveloper </a> <br>
+  (Ashish K. Sondagar)
+</div>
+<br>
+
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</body>
+</html>
